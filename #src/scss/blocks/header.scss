@@ -1,6 +1,24 @@
 .header{
-    background: tomato;
-    &__logo{
+    &__body{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__list{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__item{
+        &:not(:last-child) {
+            margin-right: 60px;
+        }
+    }
 
+    &__link {
+        @include fonts(17px, 25px, 400)
+        color: $black;
+        position: relative;
+        transition: all 0.3s ease-in-out;
     }
 }
