@@ -16,6 +16,10 @@ body {
   scroll-behavior: smooth;
   z-index: 1;
   background: $white;
+
+  &.active {
+    overflow: hidden;
+  }
 }
 ul,
 ol,
@@ -59,6 +63,40 @@ img {
   height: auto;
 }
 .container{
-  min-width: 1200px;
+  max-width: 1200px;
   width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+.content-title{
+  font-family: "Ubuntu", sans-serif;
+  color: $blue;
+
+
+  @include fonts(64px, 57.6px, 500);
+
+  @media screen and (max-width: 1200px){
+    justify-content: center;
+  }
+
+  @media screen and (max-width: 768px){
+    @include fonts(42px, 37.8px, 500);
+  }
+
+  @media screen and (max-width: 576px){
+    @include fonts(36px, 32.4px, 500);
+  }
+
+  @media screen and (max-width: 410px){
+    @include fonts(23px, 31.4px, 500);
+  }
+}
+
+
+.content-title__transparent{
+  display: block;
+  position: relative;
+  padding-left: 120px;
+  color: transparent;
+  -webkit-text-stroke: 1px $blue;
 }

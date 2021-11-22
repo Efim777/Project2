@@ -1,0 +1,84 @@
+.faq{
+    padding: 100px 0 200px;
+
+    &__body{
+        margin-top: 70px;
+        display: flex;
+        justify-content: flex-end;
+
+        @media screen and (max-width: 1200px){
+            display: block;
+        } 
+    }
+
+    &__content{
+        max-width: 1055px;
+        width: 100%;
+        margin-right: 80px;
+    }
+
+    &__item{
+        border-top: 1px solid $black ;
+    }
+
+    &__header{
+        padding: 30px 0;
+        position: relative;
+
+        @media screen and (max-width: 576px){
+            padding: 20px 0;
+        }
+
+        &::before{
+            position: absolute;
+            content: '';
+            width: 25px;
+            height: 1px;
+            background: $black;
+            transform: rotate(-90deg);
+            right: 10px;
+            top: 50%;
+        }
+
+        &::after{
+            position: absolute;
+            content: '';
+            width: 25px;
+            height: 1px;
+            background: $black;
+            transform: rotate(0deg);
+            right: 10px;
+            top: 50%;
+        }
+    }
+
+    &__header-title{
+        display: flex;
+        align-items: center;
+        font-size: 30px;
+        line-height: 30px;
+        padding-right: 45px;
+
+        @media screen and (max-width: 576px){
+            font-size: 26px;
+            line-height: 31.2px;
+        }
+    }
+
+    &__text-wrapper{
+        padding: 10px 0 60px;
+        display: none;
+
+        &.active{
+            display: block;
+        }
+    }
+    
+    &__text{
+        flex-wrap: wrap;
+        font-size: 18px;
+        line-height: 25.5px;
+        max-width: 680px;
+        width: 100%;
+    }
+}
