@@ -19,59 +19,35 @@ jQuery(document).ready(function () {
 
 //----------------Burger menu-----------------
 
-let burgerButton = document.querySelector(".burger"),
-   nav = document.querySelector(".header__nav"),
-   body = document.querySelector('body');
-
-
-burgerButton.addEventListener('click', () => {
-   burgerButton.classList.toggle('active')
-   nav.classList.toggle('active')
-   body.classList.toggle('active')
-})
+let allMenu =$('.burger, .header__nav, body');
+$('.burger').on('click', () => allMenu.toggleClass('active'));
 
 //--------------Smoth scroll link---------------
 
-let link = document.querySelectorAll("a[href*='#']")
+$("a[href*='#']").on('click', function (e) {
+   e.preventDefault();
 
-link.forEach(elem => {
-   elem.addEventListener('click', (e) => {
-      e.preventDefault()
-
-      let id = elem.getAttribute('href')
-
-      document.querySelector(id).scrollIntoView({
-         behavior: 'smooth',
-         block: 'start'
-      })
-   })
+   $('html, body').animate({
+      scrollTop: $($(this).attr('href')).offset().top,
+   }, 500,
+      'linear',
+   );
 })
 
 //----------------Accord menu------------------
 
-let headerAccord = document.querySelectorAll('.faq__header');
-
-headerAccord.forEach(head => {
-   head.addEventListener('click', function () {
-      let activeWrapperItem = document.querySelectorAll('.faq__text-wrapper.active')
-
-      activeWrapperItem.forEach(item => {
-         item.classList.remove('active')
-      })
-
-      let parentItem = head.parentNode,
-         wrapperItem = parentItem.querySelector('.faq__text-wrapper');
-
-      wrapperItem.classList.toggle('active')
-   })
+$('.faq__header').on('click', function () {
+   $('.faq__text-wrapper.active').removeClass('active');
+   $(this).parent().children('.faq__text-wrapper').toggleClass('active');
+   
 })
 
- // -------------------- Form --------------------
+// -------------------- Form --------------------
 
-let button = document.querySelector('#button'),
-   backBatton = document.querySelector('.contact__prev'),
-   content = document.querySelector('.form__content'),
-   stepNum = document.querySelector('#progresNumber'),
+let button = $('#button'),
+   backBatton = $('.contact__prev'),
+   content = $('.form__content'),
+   stepNum = $('#progresNumber'),
    step = 1,
 
    data = {
@@ -88,7 +64,7 @@ const step_1 = `
 </p>
 <div class="form__wrapper">
  <label for="radio1" class="form__radio-btn">
-    <input class="form__radio-input" type="radio" name="personalized" id="radio1" data-attribute='<5k' checked>
+    <input class="form__radio-input" type="radio" name="personalized" id="radio1" data-attribute='<5k'>
     <span class="form__radio-text">Less than €5,000</span>
  </label>
  <label for="radio2" class="form__radio-btn">
@@ -124,107 +100,107 @@ const step_4 = `
    <p>The form has been sent, thanks!</p>
 `
 
-content.innerHTML = step_1;
-stepNum.innerHTML = step;
+content.html(step_1);
+stepNum.html(step);
 
 
 function radioChecked() {
-   let radioInputs = content.querySelectorAll('input[type="radio"]');
-   radioInputs.forEach(input => {
-      input.addEventListener('click', function () {
-         if (input.checked) {
-            data.personalized = input.getAttribute('data-attribute')
-         }
+   let allInputs = $('input[type="radio"]');
+
+   $.each(allInputs, function() {
+      $(this).on('click', function() {
+      data.personalized = $(this).attr('data-attribute')
       })
-      if (input.checked) {
-         data.personalized = input.getAttribute('data-attribute')
-      }
-      if (data.personalized === input.getAttribute('data-atribute')) {
-         input.setAttribute('checked', true)
+
+      if (data.personalized === $(this).attr('data-attribute')) {
+         $(this).attr('checked', true);
       }
    })
 }
 
 function inputVal() {
-   let inputs = content.querySelectorAll('input[type="text"]');
+   let inputs = $('input[type="text"]');
 
-   inputs.forEach(input => {
-      switch (input.getAttribute('name')) {
+   $.each(inputs, function () {
+      let input = $(this)
+
+      switch (input.attr('name')) {
          case 'name':
-            data.name = input.value;
+            data.name = input.val();
             break;
          case 'lastName':
-            data.lastName = input.value;
+            data.lastName = input.val();
             break;
          case 'number':
-            data.number = input.value;
+            data.number = input.val();
             break;
          case 'date':
-            data.date = input.value;
+            data.date = input.val();
             break;
       }
    })
+
+  
 }
 
-
  // Счетчик вверх
-function countUp() {
+ function countUp() {
    step += 1;
-   stepNum.innerHTML = step;
+   stepNum.html(step);
 }
 // Счетчик вниз 
 function countDown() {
    step -= 1;
-   stepNum.innerHTML = step;
+   stepNum.html(step);
 }
 
 function stepUp() {
    if (step === 1) {
       radioChecked();
       if (data.personalized.length !== 0) {
-         content.innerHTML = step_2;
+         content.html(step_2);
          countUp()
-         backBatton.classList.toggle('disable')
+         backBatton.toggleClass('disable')
       }
    }else if(step === 2) {
       inputVal();
       if (data.name.length !== 0 && data.lastName.length !== 0) {
-         content.innerHTML = step_3;
+         content.html(step_3);
          countUp();
       }
    }else if(step === 3) {
       inputVal();
       if (data.number.length !== 0 && data.date.length !== 0) {
          submitForm();
-         content.innerHTML = step_4;
+         content.html(step_4);
       }
    }
 }
 
 function stepDown() {
    if(step === 2) {
-      content.innerHTML = step_1;
+      content.html(step_1);
       countDown()
       radioChecked();
-      backBatton.classList.toggle('disable')
+      backBatton.toggleClass('disable')
    }else if(step === 3) {
-      content.innerHTML = step_2;
+      content.html(step_2);
       countDown()
-      inputVal();
+      inputVal(); 
    }
 }
 
-button.addEventListener('click', (e) => {
+button.on('click', (e) => {
    e.preventDefault();
    stepUp()
 })
 
-backBatton.addEventListener('click', () => {
+backBatton.on('click', () => {
    stepDown()
 })
 
 // отпраква формы
-const submitForm = async () => {
+const submitForm = async () => { 
    try {
       await $.ajax({
          url: 'http://localhost:8000/posts',
@@ -242,13 +218,6 @@ const submitForm = async () => {
    }
 }
 
-// const submitForm = async () => {
-//       await fetch('http://localhost:8000/posts', {
-//          method: 'POST',
-//          headers: {
-//             'Content-Type': 'application/json;charset=utf-8'
-//          },
-//          body: JSON.stringify(data)
-//       });
-//    }
 });
+
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

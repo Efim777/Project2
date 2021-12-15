@@ -1,3 +1,36 @@
 {
-  "posts": []
+  "posts": [
+    {
+      "personalized": ">5k",
+      "name": "wewqe",
+      "lastName": "ewwqe",
+      "idNumber": "qweqwe",
+      "birthDate": "qweqw",
+      "id": 1
+    },
+    {
+      "personalized": "<5k",
+      "name": "null",
+      "lastName": "null",
+      "idNumber": "as",
+      "birthDate": "asas",
+      "id": 2
+    },
+    {
+      "personalized": "<5k",
+      "name": "Ефим Бабич",
+      "lastName": "fdgdfg",
+      "idNumber": "0961846614",
+      "birthDate": "lbp",
+      "id": 3
+    },
+    {
+      "personalized": ">25k",
+      "name": "qwert55",
+      "lastName": "ssdghygtfre",
+      "idNumber": "0961846614",
+      "birthDate": "TITU",
+      "id": 4
+    }
+  ]
 }
