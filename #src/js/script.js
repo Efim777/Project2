@@ -117,6 +117,7 @@ function radioChecked() {
       }
    })
 }
+radioChecked()
 
 function inputVal() {
    let inputs = $('input[type="text"]');
