@@ -77,6 +77,7 @@ const step_1 = `
  </label>
 </div>   
 `
+
 const step_2 = `
 <p class="form__title">
 Fill the rows below to suits better loan-offer for you
@@ -96,6 +97,7 @@ Fill the rows below to suits better loan-offer for you
  <input type="text" name='date' class="form__input" placeholder="Date of birth" data-attribute='birth'>
 </div>
 `
+
 const step_4 = `
    <p>The form has been sent, thanks!</p>
 `
@@ -107,9 +109,9 @@ stepNum.html(step);
 function radioChecked() {
    let allInputs = $('input[type="radio"]');
 
-   $.each(allInputs, function() {
-      $(this).on('click', function() {
-      data.personalized = $(this).attr('data-attribute')
+   $.each(allInputs, function () {
+      $(this).on('click', function () {
+         data.personalized = $(this).attr('data-attribute')
       })
 
       if (data.personalized === $(this).attr('data-attribute')) {
@@ -117,6 +119,7 @@ function radioChecked() {
       }
    })
 }
+radioChecked()
 
 function inputVal() {
    let inputs = $('input[type="text"]');
